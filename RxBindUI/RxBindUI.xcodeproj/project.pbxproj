@@ -13,6 +13,8 @@
 		5267BDBE20C9B9A600F8E233 /* BindCollectionViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5267BDBD20C9B9A600F8E233 /* BindCollectionViewVC.swift */; };
 		5267BDC020C9BB2700F8E233 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5267BDBF20C9BB2700F8E233 /* Header.swift */; };
 		5267BDC220C9BB9400F8E233 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5267BDC120C9BB9400F8E233 /* Cell.swift */; };
+		5267BDC420CA939100F8E233 /* SecondWayBindDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5267BDC320CA939100F8E233 /* SecondWayBindDataVC.swift */; };
+		5267BDC620CA942200F8E233 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5267BDC520CA942200F8E233 /* Model.swift */; };
 		52D048FA20C81205003AA9D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D048F920C81205003AA9D5 /* AppDelegate.swift */; };
 		52D048FC20C81205003AA9D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D048FB20C81205003AA9D5 /* ViewController.swift */; };
 		52D048FF20C81205003AA9D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D048FD20C81205003AA9D5 /* Main.storyboard */; };
@@ -29,6 +31,8 @@
 		5267BDBD20C9B9A600F8E233 /* BindCollectionViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindCollectionViewVC.swift; sourceTree = "<group>"; };
 		5267BDBF20C9BB2700F8E233 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		5267BDC120C9BB9400F8E233 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		5267BDC320CA939100F8E233 /* SecondWayBindDataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondWayBindDataVC.swift; sourceTree = "<group>"; };
+		5267BDC520CA942200F8E233 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		52D048F620C81205003AA9D5 /* RxBindUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxBindUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D048F920C81205003AA9D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D048FB20C81205003AA9D5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,7 +94,9 @@
 				52D0490F20C84629003AA9D5 /* BindDataViewController.swift */,
 				5267BDB920C9B43000F8E233 /* BindTableViewVC.swift */,
 				5267BDBB20C9B48A00F8E233 /* Contributor.swift */,
+				5267BDC520CA942200F8E233 /* Model.swift */,
 				5267BDBD20C9B9A600F8E233 /* BindCollectionViewVC.swift */,
+				5267BDC320CA939100F8E233 /* SecondWayBindDataVC.swift */,
 				5267BDBF20C9BB2700F8E233 /* Header.swift */,
 				5267BDC120C9BB9400F8E233 /* Cell.swift */,
 				52D0490D20C81579003AA9D5 /* Button.swift */,
@@ -234,11 +240,13 @@
 				52D0491020C84629003AA9D5 /* BindDataViewController.swift in Sources */,
 				5267BDC020C9BB2700F8E233 /* Header.swift in Sources */,
 				52D0490C20C81555003AA9D5 /* TextView.swift in Sources */,
+				5267BDC620CA942200F8E233 /* Model.swift in Sources */,
 				5267BDBE20C9B9A600F8E233 /* BindCollectionViewVC.swift in Sources */,
 				5267BDBC20C9B48A00F8E233 /* Contributor.swift in Sources */,
 				52D048FC20C81205003AA9D5 /* ViewController.swift in Sources */,
 				52D048FA20C81205003AA9D5 /* AppDelegate.swift in Sources */,
 				5267BDC220C9BB9400F8E233 /* Cell.swift in Sources */,
+				5267BDC420CA939100F8E233 /* SecondWayBindDataVC.swift in Sources */,
 				52D0490E20C81579003AA9D5 /* Button.swift in Sources */,
 				5267BDBA20C9B43000F8E233 /* BindTableViewVC.swift in Sources */,
 			);

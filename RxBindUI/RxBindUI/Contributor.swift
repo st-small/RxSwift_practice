@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxSwift
+import RxDataSources
+
 struct Contributor {
     
     let name: String
@@ -26,5 +29,13 @@ extension Contributor: CustomStringConvertible {
     var description: String {
         return "\(name): github.com/\(gitHubID)"
     }
+    
+}
+
+extension Contributor: IdentifiableType {
+    
+    typealias Identity = String
+    
+    var identity: Identity { return gitHubID }
     
 }
