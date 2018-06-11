@@ -6,7 +6,7 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 
 import RxSwift
 import RxCocoa
-
+/*
 // Create subscribe observables
 exampleOf("just") { 
     let observable = Observable.just("Hello, world!")
@@ -324,3 +324,52 @@ imageDataSubject
 
 imageDataSubject.onNext(swiftImageData!)
 imageDataSubject.onNext(rxImageData!)
+*/
+
+// Debagging
+
+func sampleWithPublish() {
+    let interval = Observable<Int>.interval(1, scheduler: MainScheduler.instance).publish()
+    
+    interval
+        .debug("1st")
+        .subscribe({ _ in })
+    
+    delay(delay: 2) { 
+        interval.connect()
+    }
+    
+    let disposeBag = DisposeBag()
+    delay(delay: 4) { 
+        _ = interval
+            .debug("2nd")
+            .subscribe({ _ in })
+            .disposed(by: disposeBag)
+    }
+}
+
+//sampleWithPublish()
+
+exampleOf("resourceCount") { 
+    print(RxSwift.Resources.total)
+    
+    let disposeBag = DisposeBag()
+    
+    print(RxSwift.Resources.total)
+    
+    let observable = Observable.just("Hello, world!")
+    
+    print(RxSwift.Resources.total)
+    
+    observable
+        .subscribe(onNext: { _ in
+            print(RxSwift.Resources.total)
+        })
+    .disposed(by: disposeBag)
+    
+    print(RxSwift.Resources.total)
+    
+    
+}
+
+print(RxSwift.Resources.total)
