@@ -10,3 +10,7 @@ public func delay(delay: Double, closure: @escaping ()->()) {
         closure()
     }
 }
+
+public enum ErrorValue: Error {
+    case Test
+}

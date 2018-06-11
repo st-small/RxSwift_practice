@@ -324,9 +324,9 @@ imageDataSubject
 
 imageDataSubject.onNext(swiftImageData!)
 imageDataSubject.onNext(rxImageData!)
-*/
 
-// Debagging
+
+// Debugging
 
 func sampleWithPublish() {
     let interval = Observable<Int>.interval(1, scheduler: MainScheduler.instance).publish()
@@ -373,3 +373,152 @@ exampleOf("resourceCount") {
 }
 
 print(RxSwift.Resources.total)
+
+*/ 
+ 
+// Errors handling
+
+exampleOf("catchErrorJustReturn") { 
+    let disposeBag = DisposeBag()
+    
+    let sequenceThatFails = PublishSubject<String>()
+    sequenceThatFails.catchErrorJustReturn("😁")
+        .subscribe { print($0) }
+        .disposed(by: disposeBag)
+    
+    sequenceThatFails.onNext("Hello, world!")
+    sequenceThatFails.onError(ErrorValue.Test)
+}
+
+exampleOf("catchError") { 
+    //let disposeBag = DisposeBag()
+    
+    let sequenceThatFails = PublishSubject<String>()
+    let recoverySequence = PublishSubject<String>()
+    
+    sequenceThatFails
+        .catchError {
+            print("Error: ", $0)
+            return recoverySequence
+        }
+        .subscribe { print($0) }
+        
+    sequenceThatFails.onNext("Hello, again")
+    sequenceThatFails.onError(ErrorValue.Test)
+    sequenceThatFails.onNext("Still there?")
+    
+    recoverySequence.onNext("Don't worry, I've got this!")
+}
+
+exampleOf("retry") { 
+    let disposeBag = DisposeBag()
+    
+    var count = 1
+    
+    let sequenceThatErrors = Observable<Int>.create { o in
+        o.onNext(1)
+        o.onNext(2)
+        
+        if count == 1 {
+            o.onError(ErrorValue.Test)
+            print("Error encountered")
+            count += 1
+        }
+        
+        o.onNext(3)
+        o.onCompleted()
+        
+        return Disposables.create()
+    }
+    
+    sequenceThatErrors
+        .retry()
+        .subscribe { print($0) }
+        .disposed(by: disposeBag)
+    
+}
+
+exampleOf("retry:maxAttemptCount:") { 
+    let disposeBag = DisposeBag()
+    
+    var count = 1
+    
+    let sequenceThatErrors = Observable<Int>.create { o in
+        o.onNext(1)
+        o.onNext(2)
+        
+        if count < 5 {
+            o.onError(ErrorValue.Test)
+            print("Error encountered")
+            count += 1
+        }
+        
+        o.onNext(3)
+        o.onCompleted()
+        
+        return Disposables.create()
+    }
+    
+    sequenceThatErrors
+        .retry(3)
+        .subscribe { print($0) }
+        .disposed(by: disposeBag)
+    
+}
+
+exampleOf("Driver onErrorJustReturn") { 
+    let disposeBag = DisposeBag()
+    
+    let subject = PublishSubject<Int>()
+    
+    subject.asDriver(onErrorJustReturn: 1000)
+        .drive(onNext: { print($0) })
+        .disposed(by: disposeBag)
+    
+    subject.onNext(1)
+    subject.onNext(2)
+    
+    subject.onError(ErrorValue.Test)
+    
+    subject.onNext(3)
+}
+
+exampleOf("Driver onErrorDriveWith") { 
+    let disposeBag = DisposeBag()
+    
+    let subject = PublishSubject<Int>()
+    let recoverySubject = PublishSubject<Int>()
+    
+    subject.asDriver(onErrorDriveWith: recoverySubject.asDriver(onErrorJustReturn: 1000))
+        .drive(onNext: { print($0) })
+        .disposed(by: disposeBag)
+    
+    subject.onNext(1)
+    subject.onNext(2)
+    
+    subject.onError(ErrorValue.Test)
+    
+    subject.onNext(3)
+    
+    recoverySubject.onNext(10)
+}
+
+exampleOf("Driver onErrorRecover") { 
+    let disposeBag = DisposeBag()
+    
+    let subject = PublishSubject<Int>()
+    
+    subject.asDriver {
+        print("Error: ", $0)
+        return Driver.just(1000)
+    }
+        .drive(onNext: { print($0) })
+        .disposed(by: disposeBag)
+    
+    subject.onNext(1)
+    subject.onNext(2)
+    
+    subject.onError(ErrorValue.Test)
+    
+    subject.onNext(3)
+}
